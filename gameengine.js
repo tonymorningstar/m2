@@ -538,3 +538,41 @@ $(document).ready(function(){
     });
 });
 		
+
+function pressKey(key){
+    if(keysDown.indexOf(key) === -1){ keysDown.push(key); }
+}
+function releaseKey(key){
+    let i = keysDown.indexOf(key);
+    if(i > -1) keysDown.splice(i,1);
+}
+
+$(document).ready(function(){
+    ['leftBtn','rightBtn','jumpBtn','downBtn'].forEach(function(id){
+        let el=document.getElementById(id);
+        if(!el) return;
+        el.style.touchAction='none';
+    });
+
+    let lb=document.getElementById('leftBtn');
+    let rb=document.getElementById('rightBtn');
+    let jb=document.getElementById('jumpBtn');
+    let db=document.getElementById('downBtn');
+
+    if(lb){
+      lb.addEventListener('touchstart',e=>{e.preventDefault();pressKey(37);});
+      lb.addEventListener('touchend',e=>{e.preventDefault();releaseKey(37);});
+    }
+    if(rb){
+      rb.addEventListener('touchstart',e=>{e.preventDefault();pressKey(39);});
+      rb.addEventListener('touchend',e=>{e.preventDefault();releaseKey(39);});
+    }
+    if(jb){
+      jb.addEventListener('touchstart',e=>{e.preventDefault();pressKey(32);});
+      jb.addEventListener('touchend',e=>{e.preventDefault();releaseKey(32);});
+    }
+    if(db){
+      db.addEventListener('touchstart',e=>{e.preventDefault();pressKey(40);});
+      db.addEventListener('touchend',e=>{e.preventDefault();releaseKey(40);});
+    }
+});
